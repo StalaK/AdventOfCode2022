@@ -5,7 +5,7 @@ internal static class Day2
     internal static void Run()
     {
         // https://adventofcode.com/2022/day/2
-        var overallStrategy = File.ReadAllLines("Day2Input.txt");
+        var overallStrategy = File.ReadAllLines("inputs/Day2.txt");
         var rpsTotalScore = 0;
         var ldwTotalScore = 0;
 
@@ -30,9 +30,8 @@ internal static class Day2
             ldwTotalScore += (int)gameResult + (int)GetHandScore(shapes);
         }
 
-        Console.WriteLine($"Your total score with the XYZ = RockPaperScissors strategy would be: {rpsTotalScore}");
-
-        Console.WriteLine($"Your total score with the XYZ = LoseDrawWin strategy would be: {ldwTotalScore}");
+        Console.WriteLine($"Part 1: Your total score with the XYZ = RockPaperScissors strategy would be: {rpsTotalScore}");
+        Console.WriteLine($"Part 2: Your total score with the XYZ = LoseDrawWin strategy would be: {ldwTotalScore}");
     }
 
     private static GameResult GetResult(string[] shapes) => (opp: shapes[0], you: shapes[1]) switch

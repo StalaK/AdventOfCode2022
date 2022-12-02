@@ -5,7 +5,7 @@ internal static class Day1
     internal static void Run()
     {
         // https://adventofcode.com/2022/day/1
-        var calorieEntries = File.ReadAllLines("Day1Input.txt");
+        var calorieEntries = File.ReadAllLines("inputs/Day1.txt");
 
         List<int> totalCaloriesPerElf = new();
         var elfTotal = 0;

@@ -1,17 +1,43 @@
 ﻿using AdventOfCode2022;
 
-//Console.ForegroundColor = ConsoleColor.DarkGreen;
-//Console.WriteLine("Press enter to run Day 1");
-//Console.ReadLine();
-//Console.ForegroundColor = ConsoleColor.White;
+char input = '0';
 
-//Day1.Run();
+while (input != 'x')
+{
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
+    Console.Write("Day 1");
 
-Console.ForegroundColor = ConsoleColor.DarkGreen;
-Console.WriteLine("Press enter to run Day 2");
-Console.ReadLine();
-Console.ForegroundColor = ConsoleColor.White;
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.Write("\tDay 2");
 
-Day2.Run();
+    Console.ForegroundColor = ConsoleColor.White;
+    Console.Write("\nEnter the day to run or x to exit: ");
+    input = Console.ReadKey().KeyChar;
 
-Console.ReadLine();
+    Console.Clear();
+
+    switch (input)
+    {
+        case '1':
+            Day1.Run();
+            break;
+
+        case '2':
+            Day2.Run();
+            break;
+
+        case 'x':
+            break;
+
+        default:
+            Console.WriteLine("Invalid input");
+            break;
+    }
+
+    if (input != 'x')
+    {
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
+        Console.Clear();
+    }
+}
