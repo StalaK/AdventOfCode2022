@@ -20,6 +20,20 @@ internal static partial class Execute
         }
 
         Console.WriteLine($"Part 1 - The total priority of all items in both compartments of all backpacks is {totalPriority}");
+
+        var groupPriority = 0;
+
+        for (var i = 0; i < backpacks.Length; i += 3)
+        {
+            var item = backpacks[i]
+                .Intersect(backpacks[i + 1]
+                .Intersect(backpacks[i+2]))
+                .First();
+
+            groupPriority += GetItemPriority(item);
+        }
+
+        Console.WriteLine($"Part 2 - The total priority of all groups badges is {groupPriority}");
     }
 
     private static int GetItemPriority(char item) => item >= 'a' ? item - 96 : item - 38;
