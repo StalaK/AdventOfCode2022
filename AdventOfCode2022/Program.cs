@@ -16,6 +16,9 @@ while (input != 'x')
     Console.ForegroundColor = ConsoleColor.DarkBlue;
     Console.Write("\tDay 4");
 
+    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+    Console.Write("\tDay 5");
+
     Console.ForegroundColor = ConsoleColor.White;
     Console.Write("\nEnter the day to run or x to exit: ");
     input = Console.ReadKey().KeyChar;
