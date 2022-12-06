@@ -1,8 +1,8 @@
 ﻿namespace AdventOfCode2022;
 
-internal static partial class Execute
+internal static class Day3
 {
-    internal static void Day3()
+    internal static void Execute()
     {
         // https://adventofcode.com/2022/day/3
         var backpacks = File.ReadAllLines("inputs/Day3.txt");
@@ -27,7 +27,7 @@ internal static partial class Execute
         {
             var item = backpacks[i]
                 .Intersect(backpacks[i + 1]
-                .Intersect(backpacks[i+2]))
+                .Intersect(backpacks[i + 2]))
                 .First();
 
             groupPriority += GetItemPriority(item);

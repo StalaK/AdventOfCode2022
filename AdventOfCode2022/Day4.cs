@@ -1,16 +1,15 @@
-﻿using System;
-namespace AdventOfCode2022;
+﻿namespace AdventOfCode2022;
 
-internal static partial class Execute
+internal static class Day4
 {
-    internal static void Day4()
+    internal static void Execute()
     {
         // https://adventofcode.com/2022/day/3
         var cleaningZones = File.ReadAllLines("inputs/Day4.txt");
         var containedCount = 0;
         var overlapCount = 0;
 
-        foreach(var zone in cleaningZones)
+        foreach (var zone in cleaningZones)
         {
             var elves = zone.Split(',');
             var elf1 = elves[0].Split('-').Select(x => int.Parse(x)).ToList();

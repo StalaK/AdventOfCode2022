@@ -1,8 +1,8 @@
 ﻿namespace AdventOfCode2022;
 
-internal static partial class Execute
+internal static class Day1
 {
-    internal static void Day1()
+    internal static void Execute()
     {
         // https://adventofcode.com/2022/day/1
         var calorieEntries = File.ReadAllLines("inputs/Day1.txt");

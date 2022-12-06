@@ -2,9 +2,9 @@
 
 namespace AdventOfCode2022;
 
-internal static partial class Execute
+internal static class Day5
 {
-    internal static void Day5()
+    internal static void Execute()
     {
         // https://adventofcode.com/2022/day/5
         var moves = File.ReadAllLines("inputs/Day5.txt")
