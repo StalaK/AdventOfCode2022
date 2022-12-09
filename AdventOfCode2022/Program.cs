@@ -25,6 +25,9 @@ do
     Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("\tDay 7");
 
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.Write("\tDay 8");
+
     Console.ForegroundColor = ConsoleColor.White;
     Console.Write("\nEnter the day to run or x to exit: ");
     input = Console.ReadKey().KeyChar;

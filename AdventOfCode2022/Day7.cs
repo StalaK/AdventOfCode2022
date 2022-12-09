@@ -4,7 +4,7 @@ internal static class Day7
 {
     internal static void Execute()
     {
-        // https://adventofcode.com/2022/day/6
+        // https://adventofcode.com/2022/day/7
         var consoleText = File.ReadAllLines("inputs/Day7.txt");
         Stack<string> directoryPath = new();
         List<(string path, int totalSize)> directorySizes = new();
