@@ -1,6 +1,6 @@
 ﻿using AdventOfCode2022;
 
-char input;
+string input;
 
 do
 {
@@ -31,19 +31,22 @@ do
     Console.ForegroundColor = ConsoleColor.DarkYellow;
     Console.Write("\tDay 9");
 
+    Console.ForegroundColor = ConsoleColor.DarkBlue;
+    Console.Write("\tDay 10");
+
     Console.ForegroundColor = ConsoleColor.White;
     Console.Write("\nEnter the day to run or x to exit: ");
-    input = Console.ReadKey().KeyChar;
+    input = Console.ReadLine() ?? string.Empty;
 
     Console.Clear();
 
     Execute.Day(input);
 
-    if (input != 'x')
+    if (input != "x")
     {
         Console.WriteLine("\nPress any key to continue");
         Console.ReadKey();
         Console.Clear();
     }
 
-} while (input != 'x');
+} while (input != "x");
