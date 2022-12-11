@@ -36,7 +36,7 @@ internal static class Day11
         const int PART_2_ROUND_COUNT = 10000;
 
         // Product of all worryCheck mod values
-        var checkProduct = 11 * 5 * 19 * 13 * 7 * 17 * 2 * 3;
+        var lowestCommonMultiple = 11 * 5 * 19 * 13 * 7 * 17 * 2 * 3;
 
         for (var i = 0; i < PART_2_ROUND_COUNT; i++)
         {
@@ -51,12 +51,12 @@ internal static class Day11
                     monkey.InspectionCount++;
 
                     var recipient = monkey.WorryCheck(worryLevel) ? monkey.TrueRecipient : monkey.FalseRecipient;
-                    monkeys[recipient].Items.Enqueue(worryLevel % checkProduct);
+                    monkeys[recipient].Items.Enqueue(worryLevel % lowestCommonMultiple);
                 }
             }
         }
-
-        var part2MonkeyBusiness = monkeys.OrderByDescending(m => m.InspectionCount).Take(2).Aggregate(1UL, (acc, m) => (ulong)acc * (ulong)m.InspectionCount);
+        
+        var part2MonkeyBusiness = monkeys.OrderByDescending(m => m.InspectionCount).Take(2).Aggregate(1L, (acc, m) => acc * m.InspectionCount);
         Console.WriteLine($"Part 2 - The level of monkey business after {PART_2_ROUND_COUNT} rounds from the top 2 active monkeys is {part2MonkeyBusiness} ");
     }
 
