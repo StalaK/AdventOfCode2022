@@ -28,7 +28,7 @@ internal static class Day15
             {
                 var freeSpace = distance - i;
                 var numberRange = new List<int>();
-                numberRange.AddRange(Enumerable.Range(sensor.x - distance - i, ((distance - i) * 2) + 1));
+                numberRange.AddRange(Enumerable.Range(sensor.x - distance + i, (freeSpace * 2)+1));
 
                 if (freeSpaces.ContainsKey(sensor.y + i))
                     freeSpaces[sensor.y + i].AddRange(numberRange);
@@ -42,6 +42,6 @@ internal static class Day15
             }
         }
 
-        Console.WriteLine($"Ex in row 10 there are {freeSpaces[10].Distinct().Count()} where a beacon cannot be present");
+        Console.WriteLine($"Part 1 - In row 10 there are {freeSpaces[2000000].Distinct().Count() - 1} where a beacon cannot be present");
     }
 }
