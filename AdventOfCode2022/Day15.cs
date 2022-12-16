@@ -10,7 +10,7 @@ internal static class Day15
         var sensorReadings = File.ReadAllLines("inputs/Day15.txt");
 
         var digits = new Regex(@"\d+");
-        var freeSpaces = new Dictionary<int, List<int>>();
+        var freeSpaces = new Dictionary<int, List<(int min, int max)>>();
 
         foreach (string reading in sensorReadings)
         {
@@ -27,21 +27,103 @@ internal static class Day15
             for (var i = 0; i <= distance; i++)
             {
                 var freeSpace = distance - i;
-                var numberRange = new List<int>();
-                numberRange.AddRange(Enumerable.Range(sensor.x - distance + i, (freeSpace * 2)+1));
+                var min = Math.Min(sensor.x - freeSpace, sensor.x + freeSpace);
+                var max = Math.Max(sensor.x - freeSpace, sensor.x + freeSpace);
+                var newRange = (min, max);
 
                 if (freeSpaces.ContainsKey(sensor.y + i))
-                    freeSpaces[sensor.y + i].AddRange(numberRange);
+                    freeSpaces[sensor.y + i] = ConsolidateRanges(freeSpaces[sensor.y + i], newRange);
                 else
-                    freeSpaces.Add(sensor.y + i, numberRange);
+                    freeSpaces.Add(sensor.y + i, new() { newRange });
 
                 if (freeSpaces.ContainsKey(sensor.y - i))
-                    freeSpaces[sensor.y - i].AddRange(numberRange);
+                    freeSpaces[sensor.y - i] = ConsolidateRanges(freeSpaces[sensor.y - i], newRange);
                 else
-                    freeSpaces.Add(sensor.y - i, numberRange);
+                    freeSpaces.Add(sensor.y - i, new() { newRange });
             }
+
+            var x = freeSpaces[2000000].Sum(r => r.max - r.min);
+            Console.WriteLine($"Reading: {reading} - {x}");
         }
 
-        Console.WriteLine($"Part 1 - In row 10 there are {freeSpaces[2000000].Distinct().Count() - 1} where a beacon cannot be present");
+        var freeSpaceCount = freeSpaces[2000000].Sum(r => r.max - r.min);
+        Console.WriteLine($"Part 1 - In row 2000000 there are {freeSpaceCount} where a beacon cannot be present");
+    }
+
+    private static List<(int min, int max)> ConsolidateRanges(List<(int min, int max)> baseRanges, (int min, int max) newRange)
+    {
+        List<(int min, int max)> consolidatedRanges = new();
+        var rangeHandled = false;
+
+        if (
+            baseRanges.Any(r =>
+                newRange.min >= r.min && newRange.min <= r.max && newRange.max >= r.max)
+            && baseRanges.Any(r =>
+                newRange.max >= r.min && newRange.max <= r.max && newRange.min <= r.min))
+        {
+            var min = Math.Min(
+                newRange.min,
+                baseRanges
+                    .Where(r =>
+                        newRange.min >= r.min
+                        && newRange.min <= r.max
+                        && newRange.max >= r.max)
+                    .Min(r => r.min));
+
+            var max = Math.Max(
+                newRange.max,
+                baseRanges
+                    .Where(r =>
+                        newRange.max >= r.min
+                        && newRange.max <= r.max
+                        && newRange.min <= r.min)
+                    .Max(r => r.max));
+
+            consolidatedRanges.Add((min, max));
+            rangeHandled = true;
+        }
+
+        if (!rangeHandled && baseRanges.Any(r => newRange.min >= r.min
+            && newRange.min <= r.max
+            && newRange.max > r.max))
+        {
+            consolidatedRanges.Add(
+                (baseRanges
+                    .Where(r =>
+                        newRange.min >= r.min
+                        && newRange.min <= r.max
+                        && newRange.max > r.max)
+                    .Min(r => r.min),
+                newRange.max));
+
+            rangeHandled = true;
+        }
+
+        if (!rangeHandled && baseRanges.Any(r => newRange.max >= r.min
+            && newRange.max <= r.max
+            && newRange.min < r.min))
+        {
+            consolidatedRanges.Add(
+                (newRange.min,
+                baseRanges
+                    .Where(r =>
+                        newRange.max >= r.min
+                        && newRange.max <= r.max
+                        && newRange.min < r.min)
+                    .Max(r => r.max)));
+
+            rangeHandled = true;
+        }
+
+        if (baseRanges.Any(r => newRange.min >= r.min && newRange.max <= r.max))
+            rangeHandled = true;
+
+        if (!rangeHandled)
+            consolidatedRanges.Add(newRange);
+
+        consolidatedRanges.AddRange(
+            baseRanges.Where(r => r.min > newRange.max || r.max < newRange.min));
+
+        return consolidatedRanges.Any() ? consolidatedRanges : baseRanges;
     }
 }
