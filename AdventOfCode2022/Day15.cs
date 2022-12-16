@@ -42,8 +42,8 @@ internal static class Day15
                     freeSpaces.Add(sensor.y - i, new() { newRange });
             }
 
-            var x = freeSpaces[2000000].Sum(r => r.max - r.min);
-            Console.WriteLine($"Reading: {reading} - {x}");
+            var currentProgress = freeSpaces[2000000].Sum(r => r.max - r.min);
+            Console.WriteLine($"Reading: {reading} - {currentProgress}");
         }
 
         var freeSpaceCount = freeSpaces[2000000].Sum(r => r.max - r.min);
