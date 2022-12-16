@@ -9,8 +9,8 @@ internal static class Day15
         // https://adventofcode.com/2022/day/15
         var sensorReadings = File.ReadAllLines("inputs/Day15.txt");
 
-        var digits = new Regex(@"\d+");
-        var freeSpaces = new Dictionary<int, List<(int min, int max)>>();
+        var digits = new Regex(@"-?\d+");
+        var freeSpaces = new Dictionary<long, List<(int min, int max)>>();
 
         foreach (string reading in sensorReadings)
         {
