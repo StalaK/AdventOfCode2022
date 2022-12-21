@@ -12,6 +12,8 @@ internal static class Day14
         var sandInTheAbyss = false;
         var sandCount = 0;
 
+        Console.SetBufferSize(3000, 9001);
+
         do
         {
             (sandPit, sandInTheAbyss) = DropSand(sandPit, startPoint, startPoint);

@@ -4,6 +4,9 @@ string input;
 
 do
 {
+    Console.SetWindowSize(120, 30);
+    Console.SetBufferSize(120, 9001);
+
     Console.ForegroundColor = ConsoleColor.DarkGreen;
     Console.Write("Day 1");
 
